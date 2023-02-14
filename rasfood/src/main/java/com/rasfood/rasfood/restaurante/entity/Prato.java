@@ -1,3 +1,5 @@
+package com.rasfood.rasfood.restaurante.entity;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -22,6 +24,8 @@ public class Prato {
     @Column(name = "data_de_registro")
     private LocalDate dataDeRegistro;
 
+    public Prato(){}
+    
     public Prato(Integer id, String nome, String description, Boolean disp, BigDecimal valor) {
         this.id = id;
         this.nome = nome;
