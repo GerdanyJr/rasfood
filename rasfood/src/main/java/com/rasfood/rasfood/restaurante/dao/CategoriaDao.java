@@ -27,6 +27,11 @@ public class CategoriaDao {
     return this.entityManager.createQuery(query,Categoria.class).getResultList();
    }
 
+   public List<Categoria> consultarCategoriaPorNome(String filtro){
+    String query = "SELECT cat FROM Categoria cat WHERE UPPER(cat.nome) LIKE UPPER(:nome)";
+    return this.entityManager.createQuery(query,Categoria.class).setParameter("nome",filtro).getResultList();
+   }
+
    public void atualizarCategoria(Categoria categoria){
     this.entityManager.merge(categoria);
    }

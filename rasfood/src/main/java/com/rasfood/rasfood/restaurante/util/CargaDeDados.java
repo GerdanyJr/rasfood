@@ -15,10 +15,13 @@ public class CargaDeDados {
     public static void cadatrarCategorias(EntityManager entityManager) {
         Categoria entrada = new Categoria("Entradas");
         Categoria salada = new Categoria("Saladas");
+        Categoria saida = new Categoria("Saidas");
         Categoria principal = new Categoria("Pratos principais");
 
         CategoriaDao categoriaDao = new CategoriaDao(entityManager);
 
+        categoriaDao.cadastrarCategoria(saida);
+        entityManager.flush();
         categoriaDao.cadastrarCategoria(entrada);
         entityManager.flush();
         categoriaDao.cadastrarCategoria(salada);
@@ -40,7 +43,7 @@ public class CargaDeDados {
         cardapios.add(salmao);
         Cardapio bife = new Cardapio("Bife acebolado","Bife frito acompanhado com cebola",true,BigDecimal.valueOf(30.0),categorias.get(2));
         cardapios.add(bife);
-        Cardapio arroz = new Cardapio("Arroz branco","Arroz com tempero de alho",true,BigDecimal.valueOf(15.0),categorias.get(0));
+        Cardapio arroz = new Cardapio("Arroz","Arroz com tempero de alho",true,BigDecimal.valueOf(15.0),categorias.get(0));
         cardapios.add(arroz);
         Cardapio feijao = new Cardapio("Feijão preto","Feijao preto com carne",true,BigDecimal.valueOf(40.0),categorias.get(2));
         cardapios.add(feijao);
@@ -58,5 +61,6 @@ public class CargaDeDados {
             cardapioDao.cadastrarCardapio(cardapio);
             entityManager.flush();
         }
+        entityManager.clear();
     }
 }
