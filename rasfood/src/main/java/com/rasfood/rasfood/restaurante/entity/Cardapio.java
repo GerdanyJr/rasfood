@@ -2,6 +2,7 @@ package com.rasfood.rasfood.restaurante.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -33,7 +34,7 @@ public class Cardapio {
     private Categoria categoria;
 
     @OneToMany
-    private List<OrdersCardapio> ordersCardapiosList;
+    private List<OrdersCardapio> ordersCardapiosList = new ArrayList<>();
 
     @Column(name = "Data_de_registro")
     private LocalDate dataDeRegistro;

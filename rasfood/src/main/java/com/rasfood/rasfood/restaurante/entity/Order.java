@@ -2,6 +2,7 @@ package com.rasfood.rasfood.restaurante.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,9 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -33,13 +31,18 @@ public class Order {
     @ManyToOne
     private Cliente cliente;
 
-    @OneToMany
-    private List<OrdersCardapio> ordersCardapiosList;
+    @OneToMany(mappedBy = "order")
+    private List<OrdersCardapio> ordersCardapiosList = new ArrayList<>();
 
     public Order(){}
 
     public Order(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public void addOrdersCardapio(OrdersCardapio ordersCardapio){
+        ordersCardapio.setOrder(this);
+        this.ordersCardapiosList.add(ordersCardapio);
     }
 
     public Integer getId() {
