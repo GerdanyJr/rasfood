@@ -2,17 +2,22 @@ package com.rasfood.rasfood.restaurante.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Pedidos")
+@Table(name = "orders")
 public class Order {
     
     @Id
@@ -23,16 +28,17 @@ public class Order {
     private BigDecimal valorTotal;
 
     @Column(name = "Data_de_criação")
-    private LocalDate dataDePedido;
+    private LocalDate dataDePedido = LocalDate.now();
     
     @ManyToOne
     private Cliente cliente;
 
+    @OneToMany
+    private List<OrdersCardapio> ordersCardapiosList;
+
     public Order(){}
 
-    public Order(BigDecimal valorTotal, LocalDate dataDePedido, Cliente cliente) {
-        this.valorTotal = valorTotal;
-        this.dataDePedido = dataDePedido;
+    public Order(Cliente cliente) {
         this.cliente = cliente;
     }
 
