@@ -8,11 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Pratos")
-public class Prato {
+@Table(name = "Cardapio")
+public class Cardapio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,18 +22,48 @@ public class Prato {
     private String description;
     private Boolean disp;
     private BigDecimal valor;
-    @Column(name = "data_de_registro")
+    @ManyToOne
+    private Categoria categoria;
+
+    @Column(name = "Data_de_registro")
     private LocalDate dataDeRegistro;
 
-    public Prato(){}
-    
-    public Prato(Integer id, String nome, String description, Boolean disp, BigDecimal valor) {
+    public Cardapio(){}
+
+    public Cardapio(String nome, String description, Boolean disp, BigDecimal valor, Categoria categoria) {
+        this.nome = nome;
+        this.description = description;
+        this.disp = disp;
+        this.valor = valor;
+        this.categoria = categoria;
+        this.dataDeRegistro = LocalDate.now();
+    }
+
+    public Cardapio(String nome, String description, Boolean disp, BigDecimal valor, LocalDate dataDeRegistro,Categoria categoria) {
+        this.nome = nome;
+        this.description = description;
+        this.disp = disp;
+        this.valor = valor;
+        this.dataDeRegistro = dataDeRegistro;
+        this.categoria = categoria;
+    }
+
+    public Cardapio(Integer id, String nome, String description, Boolean disp, BigDecimal valor,Categoria categoria) {
         this.id = id;
         this.nome = nome;
         this.description = description;
         this.disp = disp;
         this.valor = valor;
+        this.categoria = categoria;
         dataDeRegistro = LocalDate.now();
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public Integer getId() {
@@ -82,7 +113,7 @@ public class Prato {
     @Override
     public String toString() {
         return "Prato [id=" + id + ", nome=" + nome + ", description=" + description + ", disp=" + disp + ", valor="
-                + valor + ", dataDeRegistro=" + dataDeRegistro + "]";
+                + valor + ", dataDeRegistro=" + dataDeRegistro + ", "+categoria+"]";
     }
 
 }

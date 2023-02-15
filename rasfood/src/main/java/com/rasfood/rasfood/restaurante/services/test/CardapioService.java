@@ -4,31 +4,23 @@ import java.math.BigDecimal;
 
 import javax.persistence.EntityManager;
 
-import com.rasfood.rasfood.restaurante.dao.PratoDao;
-import com.rasfood.rasfood.restaurante.entity.Prato;
+import com.rasfood.rasfood.restaurante.dao.CardapioDao;
+import com.rasfood.rasfood.restaurante.dao.CategoriaDao;
+import com.rasfood.rasfood.restaurante.entity.Cardapio;
+import com.rasfood.rasfood.restaurante.entity.Categoria;
+import com.rasfood.rasfood.restaurante.util.CargaDeDados;
 import com.rasfood.rasfood.restaurante.util.JPAUtil;
 
-public class PratoService {
+public class CardapioService {
     public static void main(String[] args) {
-        
-        Prato risotto = new Prato(null,"Risotto de frutos do mar","Risotto com lula, polvo e mariscos",true,BigDecimal.valueOf(88.50));
-        Prato salmao = new Prato(null,"Salmão ao molho de maracujá","Salmão grelhado ao moho de maracujá",true,BigDecimal.valueOf(50.00));
+        final EntityManager entityManager = JPAUtil.getEntityManagerRasFood();
+        CardapioDao cardapioDao = new CardapioDao(entityManager);
 
-        EntityManager em = JPAUtil.getEntityManagerRasFood();
-        PratoDao pratoDao = new PratoDao(em);
-        em.getTransaction().begin();
-        pratoDao.cadastrar(risotto);
-        em.flush();
-        pratoDao.cadastrar(salmao);
-        em.flush();
-        System.out.println("O prato consultado foi:"+pratoDao.consultar(2));
+        entityManager.getTransaction().begin();
+        CargaDeDados.cadatrarCategorias(entityManager);
+        CargaDeDados.cadastrarProdutosCardapio(entityManager);
+        cardapioDao.consultarCardapioTodos().forEach(e -> System.out.println("O produto consultado foi:"+e));
 
-        pratoDao.excluir(risotto);
-        System.out.println("=================================================");
-        System.out.println("O prato consultado foi:"+pratoDao.consultar(2));
-        System.out.println("=================================================");
-        em.clear();
-        risotto.setValor(BigDecimal.valueOf(75.50));
-        pratoDao.atualizar(salmao);
+        entityManager.close();
     }
 }

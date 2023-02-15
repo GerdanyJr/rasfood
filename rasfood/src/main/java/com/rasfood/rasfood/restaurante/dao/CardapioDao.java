@@ -1,5 +1,7 @@
 package com.rasfood.rasfood.restaurante.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import com.rasfood.rasfood.restaurante.entity.Cardapio;
@@ -17,8 +19,13 @@ public class CardapioDao {
         System.out.println("Entidade cadastrada: "+prato);
     }
 
-    public Cardapio consultarCardapio(final Integer id){
+    public Cardapio consultarCardapioPorId(final Integer id){
         return this.entityManager.find(Cardapio.class, id);
+    }
+
+    public List<Cardapio> consultarCardapioTodos(){
+        String query = "SELECT c FROM Cardapio c";
+        return this.entityManager.createQuery(query,Cardapio.class).getResultList();
     }
 
     public void atualizarCardapio(final Cardapio prato){

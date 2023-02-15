@@ -1,5 +1,7 @@
 package com.rasfood.rasfood.restaurante.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import com.rasfood.rasfood.restaurante.entity.Categoria;
@@ -18,6 +20,11 @@ public class CategoriaDao {
 
    public Categoria consultarCategoria(Integer id){
     return this.entityManager.find(Categoria.class, id);
+   }
+
+   public List<Categoria> consultarCategoriaTodos(){
+    String query = "SELECT cat FROM Categoria cat";
+    return this.entityManager.createQuery(query,Categoria.class).getResultList();
    }
 
    public void atualizarCategoria(Categoria categoria){
