@@ -1,4 +1,4 @@
-package com.rasfood.rasfood.restaurante.entity;
+package com.rasfood.restaurante.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "orders")
 public class Order {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -27,22 +27,24 @@ public class Order {
 
     @Column(name = "Data_de_criação")
     private LocalDate dataDePedido = LocalDate.now();
-    
+
     @ManyToOne
     private Cliente cliente;
 
     @OneToMany(mappedBy = "order")
     private List<OrdersCardapio> ordersCardapiosList = new ArrayList<>();
 
-    public Order(){}
+    public Order() {
+    }
 
     public Order(Cliente cliente) {
         this.cliente = cliente;
     }
 
-    public void addOrdersCardapio(OrdersCardapio ordersCardapio){
+    public void addOrdersCardapio(OrdersCardapio ordersCardapio) {
         ordersCardapio.setOrder(this);
         this.ordersCardapiosList.add(ordersCardapio);
+        this.valorTotal = ordersCardapio.getValor().multiply(BigDecimal.valueOf(ordersCardapio.getQuantidade()));
     }
 
     public Integer getId() {
@@ -55,10 +57,6 @@ public class Order {
 
     public BigDecimal getValorTotal() {
         return valorTotal;
-    }
-
-    public void setValorTotal(BigDecimal valorTotal) {
-        this.valorTotal = valorTotal;
     }
 
     public LocalDate getDataDePedido() {
@@ -79,7 +77,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order [id=" + id + ", valorTotal=" + valorTotal + ", dataDePedido=" + dataDePedido + ", "
-                + cliente + "]";
+        return "Order [id=" + id + ", valorTotal=" + valorTotal + ", dataDePedido=" + dataDePedido + ", cliente="
+                + cliente + ", ordersCardapiosList=" + ordersCardapiosList + "]";
     }
 }

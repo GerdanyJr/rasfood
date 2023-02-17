@@ -1,10 +1,10 @@
-package com.rasfood.rasfood.restaurante.dao;
+package com.rasfood.restaurante.dao;
 
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import com.rasfood.rasfood.restaurante.entity.Categoria;
+import com.rasfood.restaurante.entity.Categoria;
 
 public class CategoriaDao {
     

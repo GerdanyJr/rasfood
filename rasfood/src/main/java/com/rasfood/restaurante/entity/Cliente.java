@@ -1,4 +1,4 @@
-package com.rasfood.rasfood.restaurante.entity;
+package com.rasfood.restaurante.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +27,11 @@ public class Cliente {
         this.cpf = cpf;
         this.nome = nome;
         endereçosList.add(endereço);
+    }
+
+    public void addEndereço(Endereço endereço){
+        endereçosList.add(endereço);
+        endereço.setCliente(this);
     }
 
     public List<Endereço> getEndereçosList() {

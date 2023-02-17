@@ -1,4 +1,4 @@
-package com.rasfood.rasfood.restaurante.dao;
+package com.rasfood.restaurante.dao;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import com.rasfood.rasfood.restaurante.entity.Cardapio;
+import com.rasfood.restaurante.entity.Cardapio;
 
 public class CardapioDao {
 

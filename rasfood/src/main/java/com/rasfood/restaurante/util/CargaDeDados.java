@@ -1,4 +1,4 @@
-package com.rasfood.rasfood.restaurante.util;
+package com.rasfood.restaurante.util;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -6,10 +6,10 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import com.rasfood.rasfood.restaurante.dao.CardapioDao;
-import com.rasfood.rasfood.restaurante.dao.CategoriaDao;
-import com.rasfood.rasfood.restaurante.entity.Cardapio;
-import com.rasfood.rasfood.restaurante.entity.Categoria;
+import com.rasfood.restaurante.dao.CardapioDao;
+import com.rasfood.restaurante.dao.CategoriaDao;
+import com.rasfood.restaurante.entity.Cardapio;
+import com.rasfood.restaurante.entity.Categoria;
 
 public class CargaDeDados {
     public static void cadatrarCategorias(EntityManager entityManager) {

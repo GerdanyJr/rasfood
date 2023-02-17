@@ -1,4 +1,4 @@
-package com.rasfood.rasfood.restaurante.entity;
+package com.rasfood.restaurante.entity;
 
 import java.math.BigDecimal;
 
@@ -30,10 +30,18 @@ public class OrdersCardapio {
     public OrdersCardapio() {
     }
 
-    public OrdersCardapio(Order order, Cardapio cardapio, Integer quantidade) {
+    public OrdersCardapio(Integer id, Order order, Cardapio cardapio, Integer quantidade) {
+        this.id = id;
         this.order = order;
         this.cardapio = cardapio;
         this.quantidade = quantidade;
+        this.valor = cardapio.getValor();
+    }
+
+    public OrdersCardapio(Cardapio cardapio, Integer quantidade) {
+        this.cardapio = cardapio;
+        this.quantidade = quantidade;
+        this.valor = cardapio.getValor();
     }
 
     public Integer getId() {
@@ -78,7 +86,7 @@ public class OrdersCardapio {
 
     @Override
     public String toString() {
-        return "OrdersCardapio [id=" + id + ", order=" + order + ", cardapio=" + cardapio + ", valor=" + valor
+        return "OrdersCardapio [id=" + id  + ", cardapio=" + cardapio + ", valor=" + valor
                 + ", quantidade=" + quantidade + "]";
     }
 }

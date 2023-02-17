@@ -1,4 +1,4 @@
-package com.rasfood.rasfood.restaurante.entity;
+package com.rasfood.restaurante.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
