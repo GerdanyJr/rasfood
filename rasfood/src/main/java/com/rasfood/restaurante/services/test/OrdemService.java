@@ -1,5 +1,7 @@
 package com.rasfood.restaurante.services.test;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import com.rasfood.restaurante.dao.CardapioDao;
@@ -23,16 +25,20 @@ public class OrdemService {
         CargaDeDados.cadatrarCategorias(entityManager);
         CargaDeDados.cadastrarProdutosCardapio(entityManager);
 
-        Endereço endereço = new Endereço("40000000", "Fernando Spinola", "Ao lado do ateliê", "Bahia", "Vitória da Conquista", null);
-        Cliente cliente = new Cliente("123456789", "João", endereço);
+        Endereço endereço = new Endereço("40000000", "Fernando Spinola", "Ao lado do atelie", "Bahia", "Vitoria da Conquista", null);
+        Cliente cliente = new Cliente("123456789", "Joao Silva", endereço);
+        Cliente roberto = new Cliente("123456789", "Roberto Silva", endereço);
         cliente.addEndereço(endereço);
         Order order = new Order(cliente);
-        order.addOrdersCardapio(new OrdersCardapio(cardapioDao.consultarCardapioPorId(1), 3));
-        System.out.println(ordemDao.consultarItemsMaisVendidos());
+        order.addOrdersCardapio(new OrdersCardapio(cardapioDao.consultarCardapioPorId(1), 3));        
         clienteDao.cadastrarCliente(cliente);
         ordemDao.cadastrarOrder(order);
-        System.out.println("O seu pedido foi:"+order);
+        entityManager.flush();
         entityManager.getTransaction().commit();
+        List<Cliente> list = clienteDao.consultarClientePorNome("J");
+        System.out.println("========================");
+        list.forEach(c->System.out.println(c));
+        System.out.println("========================");
         entityManager.close();
         JPAUtil.closeRasFoodFactory();
     }

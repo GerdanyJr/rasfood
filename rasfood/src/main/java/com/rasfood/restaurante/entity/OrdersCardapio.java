@@ -3,6 +3,7 @@ package com.rasfood.restaurante.entity;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,10 +18,10 @@ public class OrdersCardapio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Order order;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Cardapio cardapio;
 
     private BigDecimal valor;

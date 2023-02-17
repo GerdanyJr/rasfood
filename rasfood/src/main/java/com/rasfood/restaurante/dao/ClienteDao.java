@@ -29,7 +29,7 @@ public class ClienteDao {
 
    public List<Cliente> consultarClientePorNome(String filtro){
     String query = "SELECT c FROM Cliente c WHERE UPPER(c.nome) LIKE UPPER(:nome)";
-    return this.entityManager.createQuery(query,Cliente.class).setParameter("nome",filtro).getResultList();
+    return this.entityManager.createQuery(query,Cliente.class).setParameter("nome","%"+filtro+"%").getResultList();
    }
 
    public void atualizarCliente(Cliente cliente){

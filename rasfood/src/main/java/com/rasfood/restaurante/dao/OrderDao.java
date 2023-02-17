@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import com.rasfood.restaurante.entity.Cliente;
 import com.rasfood.restaurante.entity.Order;
 import com.rasfood.restaurante.vo.ItensPrincipaisVo;
 
@@ -27,6 +28,11 @@ public class OrderDao {
         String query = "SELECT o FROM Order cat";
         return this.entityManager.createQuery(query, Order.class).getResultList();
     }
+
+    public Cliente joinFetchCliente(Integer id){
+        String jpql = "SELECT o FROM Order o JOIN FETCH o.client WHERE o.id = :id";
+        return this.entityManager.createQuery(jpql,Cliente.class).setParameter("id",id).getSingleResult();
+    } 
 
     public List<Order> consultarOrderPorNome(String filtro) {
         String query = "SELECT o FROM Order o WHERE UPPER(o.nome) LIKE UPPER(:nome)";

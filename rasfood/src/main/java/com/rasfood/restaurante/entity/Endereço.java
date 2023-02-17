@@ -1,6 +1,7 @@
 package com.rasfood.restaurante.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class Endereço {
     private String estado;
     private String cidade;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Cliente cliente;
 
     public Endereço() {
@@ -89,5 +90,11 @@ public class Endereço {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    @Override
+    public String toString() {
+        return "Endereço [id=" + id + ", cep=" + cep + ", rua=" + rua + ", complemento=" + complemento + ", estado="
+                + estado + ", cidade=" + cidade + "]";
     }
 }
